@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>성민 | Semiconductor Engineering Portfolio</title>
+  <meta name="description" content="반도체 공정·패키징 엔지니어 지원을 위한 포트폴리오" />
+  <style>
+    :root {
+      --bg: #07111f;
+      --bg-soft: #0d1a2b;
+      --card: rgba(17, 31, 49, 0.82);
+      --line: rgba(255,255,255,.10);
+      --text: #eef5ff;
+      --muted: #a8b6c8;
+      --accent: #64b5ff;
+      --accent-2: #8b7cff;
+      --good: #64d8a4;
+      --shadow: 0 20px 50px rgba(0,0,0,.28);
+      --radius: 22px;
+      --max: 1120px;
+    }
+
+    * { box-sizing: border-box; scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: "Pretendard", "Noto Sans KR", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 15% 10%, rgba(100,181,255,.15), transparent 28%),
+        radial-gradient(circle at 85% 20%, rgba(139,124,255,.13), transparent 24%),
+        linear-gradient(180deg, #07111f 0%, #091523 50%, #06101b 100%);
+      line-height: 1.65;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
+
+    nav {
+      position: sticky; top: 0; z-index: 30;
+      backdrop-filter: blur(14px);
+      background: rgba(7,17,31,.78);
+      border-bottom: 1px solid var(--line);
+    }
+    .nav-inner {
+      height: 68px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .brand { font-weight: 800; letter-spacing: -.02em; }
+    .brand span { color: var(--accent); }
+    .nav-links { display:flex; gap: 22px; font-size: 14px; color: var(--muted); }
+    .nav-links a:hover { color: var(--text); }
+
+    .hero { padding: 110px 0 86px; }
+    .eyebrow {
+      display:inline-flex; align-items:center; gap:8px;
+      padding: 7px 12px; border:1px solid rgba(100,181,255,.24);
+      border-radius:999px; color:#bfe0ff; background:rgba(100,181,255,.08);
+      font-size:13px; font-weight:700;
+    }
+    .dot { width:8px; height:8px; border-radius:50%; background:var(--good); box-shadow:0 0 14px rgba(100,216,164,.75); }
+    h1 {
+      font-size: clamp(44px, 7vw, 78px);
+      line-height: 1.05; margin: 20px 0 18px; letter-spacing: -.055em;
+      max-width: 900px;
+    }
+    .hero h1 .accent { color: var(--accent); }
+    .hero-lead { max-width: 760px; color: var(--muted); font-size: clamp(18px, 2vw, 22px); }
+    .hero-actions { display:flex; flex-wrap:wrap; gap:12px; margin-top:32px; }
+    .btn {
+      display:inline-flex; align-items:center; justify-content:center;
+      min-height:48px; padding:0 18px; border-radius:14px; font-weight:800;
+      border:1px solid var(--line); background:rgba(255,255,255,.04);
+    }
+    .btn-primary { background:linear-gradient(135deg, #62b3ff, #8678ff); color:#06101b; border:none; }
+    .btn:hover { transform: translateY(-1px); }
+
+    section { padding: 72px 0; }
+    .section-head { margin-bottom: 28px; }
+    .section-kicker { color:var(--accent); font-size:13px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; }
+    h2 { margin: 8px 0; font-size: clamp(30px, 4vw, 44px); letter-spacing:-.04em; }
+    .section-desc { color:var(--muted); max-width:740px; }
+
+    .grid { display:grid; gap:18px; }
+    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    .card {
+      background: var(--card); border:1px solid var(--line); border-radius:var(--radius);
+      box-shadow:var(--shadow); padding:26px;
+      backdrop-filter: blur(14px);
+    }
+    .card h3 { margin:0 0 8px; font-size:21px; letter-spacing:-.03em; }
+    .card p { margin:0; color:var(--muted); }
+    .card .meta { color:#cfdbeb; font-size:13px; font-weight:700; margin-bottom:10px; }
+
+    .skill {
+      min-height:180px;
+      display:flex; flex-direction:column; justify-content:space-between;
+    }
+    .skill-icon {
+      width:46px; height:46px; border-radius:13px;
+      display:grid; place-items:center;
+      background:linear-gradient(135deg, rgba(100,181,255,.18), rgba(139,124,255,.17));
+      border:1px solid rgba(100,181,255,.18);
+      font-size:21px;
+    }
+    .tags { display:flex; flex-wrap:wrap; gap:8px; margin-top:16px; }
+    .tag {
+      border:1px solid var(--line); color:#c8d5e7; background:rgba(255,255,255,.035);
+      padding:6px 10px; border-radius:999px; font-size:12px;
+    }
+
+    .featured {
+      display:grid; grid-template-columns: 1.05fr .95fr; gap:20px;
+      align-items:stretch;
+    }
+    .project-visual {
+      min-height:330px; border-radius:18px; overflow:hidden; position:relative;
+      border:1px solid rgba(100,181,255,.16);
+      background:
+        linear-gradient(130deg, rgba(100,181,255,.15), rgba(139,124,255,.07)),
+        repeating-linear-gradient(0deg, transparent, transparent 33px, rgba(255,255,255,.035) 34px),
+        repeating-linear-gradient(90deg, transparent, transparent 33px, rgba(255,255,255,.035) 34px);
+    }
+    .wire {
+      position:absolute; height:2px; background:linear-gradient(90deg, transparent, #7ac7ff, transparent);
+      transform-origin:left center; opacity:.8;
+    }
+    .wire.w1 { width: 330px; left: 13%; top: 30%; transform:rotate(14deg); }
+    .wire.w2 { width: 300px; left: 38%; top: 55%; transform:rotate(-18deg); }
+    .wire.w3 { width: 250px; left: 18%; top: 70%; transform:rotate(-3deg); }
+    .die {
+      position:absolute; width:120px; height:120px; left:50%; top:50%;
+      transform:translate(-50%,-50%); border:1px solid rgba(255,255,255,.20);
+      border-radius:10px; background:linear-gradient(145deg, #1c3b5e, #102236);
+      box-shadow:0 0 60px rgba(100,181,255,.12), inset 0 0 30px rgba(255,255,255,.04);
+    }
+    .die::before, .die::after {
+      content:""; position:absolute; border:1px solid rgba(100,181,255,.35); inset:15px; border-radius:7px;
+    }
+    .die::after { inset:38px; border-color:rgba(139,124,255,.38); }
+
+    .project-list { margin:18px 0 0; padding-left:19px; color:var(--muted); }
+    .project-list li { margin:7px 0; }
+
+    .timeline { position:relative; padding-left:24px; }
+    .timeline::before {
+      content:""; position:absolute; left:5px; top:6px; bottom:6px; width:1px; background:var(--line);
+    }
+    .timeline-item { position:relative; padding:0 0 26px 20px; }
+    .timeline-item::before {
+      content:""; position:absolute; width:10px; height:10px; border-radius:50%;
+      left:-1px; top:8px; background:var(--accent); box-shadow:0 0 18px rgba(100,181,255,.5);
+    }
+    .timeline-item h3 { margin:0 0 5px; }
+    .timeline-item .period { color:var(--accent); font-size:13px; font-weight:800; }
+
+    .metrics {
+      display:grid; grid-template-columns:repeat(4, minmax(0,1fr)); gap:14px;
+    }
+    .metric {
+      padding:22px; border:1px solid var(--line); border-radius:18px; background:rgba(255,255,255,.035);
+    }
+    .metric .num { font-size:30px; font-weight:900; letter-spacing:-.05em; }
+    .metric .label { color:var(--muted); font-size:13px; margin-top:5px; }
+
+    .quote {
+      padding:28px 30px; border-left:3px solid var(--accent);
+      background:linear-gradient(90deg, rgba(100,181,255,.08), rgba(255,255,255,.02));
+      border-radius:0 18px 18px 0; color:#d8e5f4; font-size:18px;
+    }
+
+    footer { padding:50px 0 70px; border-top:1px solid var(--line); color:var(--muted); }
+    .footer-grid { display:flex; justify-content:space-between; gap:25px; align-items:flex-start; }
+    .small { font-size:13px; }
+    .contact { display:flex; flex-wrap:wrap; gap:10px; }
+    .contact a {
+      padding:9px 12px; border-radius:11px; border:1px solid var(--line); background:rgba(255,255,255,.03);
+      font-size:13px;
+    }
+
+    @media (max-width: 900px) {
+      .grid-3, .grid-2, .metrics, .featured { grid-template-columns:1fr 1fr; }
+      .featured { grid-template-columns:1fr; }
+      .footer-grid { flex-direction:column; }
+    }
+    @media (max-width: 640px) {
+      .container { width:min(var(--max), calc(100% - 28px)); }
+      .nav-links { display:none; }
+      .hero { padding: 82px 0 65px; }
+      section { padding: 58px 0; }
+      .grid-3, .grid-2, .metrics { grid-template-columns:1fr; }
+      .card { padding:22px; }
+      h1 { font-size:48px; }
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="container nav-inner">
+      <div class="brand">SEONGMIN<span>.TECH</span></div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#competency">Competency</a>
+        <a href="#projects">Projects</a>
+        <a href="#education">Education</a>
+        <a href="#career">Career</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <header class="hero">
+      <div class="container">
+        <div class="eyebrow"><span class="dot"></span> Semiconductor Process & Packaging Engineer</div>
+        <h1>
+          데이터를 기반으로<br />
+          <span class="accent">공정을 개선하는 엔지니어</span>
+        </h1>
+        <p class="hero-lead">
+          반도체 공정과 패키징에 대한 이론 및 실습 경험을 바탕으로
+          공정 조건을 분석하고, 실험을 설계하며, 문제의 원인을 데이터로 찾아가는
+          엔지니어를 목표로 합니다.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#projects">프로젝트 보기</a>
+          <a class="btn" href="#contact">Contact</a>
+        </div>
+      </div>
+    </header>
+
+    <section id="about">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">01 / About</div>
+          <h2>반도체 공정을 배우고, 직접 다루었습니다.</h2>
+          <p class="section-desc">
+            전자공학을 전공하고 반도체 공정·패키징 교육과 실습을 통해
+            Photo, Deposition, Etching, MOSCAP, Wire Bonding, Test 등
+            전공 지식을 실제 공정 흐름과 연결해 이해했습니다.
+          </p>
+        </div>
+
+        <div class="metrics">
+          <div class="metric"><div class="num">ECE</div><div class="label">전자공학 학사</div></div>
+          <div class="metric"><div class="num">DOE</div><div class="label">실험계획법 기반 공정 분석</div></div>
+          <div class="metric"><div class="num">PKG</div><div class="label">반도체 패키징 실습 경험</div></div>
+          <div class="metric"><div class="num">Data</div><div class="label">Excel / Spotfire / Minitab 활용</div></div>
+        </div>
+
+        <div style="height:18px"></div>
+        <div class="quote">
+          “좋은 공정 엔지니어는 단순히 장비를 다루는 사람이 아니라,
+          공정 결과의 변화를 정량적으로 해석하고 재현 가능한 조건을 만드는 사람이라고 생각합니다.”
+        </div>
+      </div>
+    </section>
+
+    <section id="competency">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">02 / Core Competency</div>
+          <h2>직무에 연결되는 핵심 역량</h2>
+          <p class="section-desc">
+            생산·공정기술 직무에서 요구되는 문제 해결, 데이터 분석, 공정 이해를 중심으로 정리했습니다.
+          </p>
+        </div>
+
+        <div class="grid grid-3">
+          <article class="card skill">
+            <div>
+              <div class="skill-icon">Δ</div>
+              <h3 style="margin-top:18px">공정 최적화</h3>
+              <p>공정 변수와 결과 사이의 관계를 파악하고 최적 조건을 찾는 접근을 익혔습니다.</p>
+            </div>
+            <div class="tags"><span class="tag">DOE</span><span class="tag">Regression</span><span class="tag">Process Window</span></div>
+          </article>
+
+          <article class="card skill">
+            <div>
+              <div class="skill-icon">∑</div>
+              <h3 style="margin-top:18px">데이터 분석</h3>
+              <p>공정 데이터를 정리·시각화하고 원인과 결과를 구분해 해석하는 능력을 갖추었습니다.</p>
+            </div>
+            <div class="tags"><span class="tag">Excel</span><span class="tag">Spotfire</span><span class="tag">Minitab</span></div>
+          </article>
+
+          <article class="card skill">
+            <div>
+              <div class="skill-icon">⌁</div>
+              <h3 style="margin-top:18px">반도체 패키징</h3>
+              <p>Die Bond, Wire Bond, Mold, Ball Attach, Test 등 후공정 흐름을 학습하고 실습했습니다.</p>
+            </div>
+            <div class="tags"><span class="tag">Wire Bond</span><span class="tag">Test</span><span class="tag">HBM</span></div>
+          </article>
+
+          <article class="card skill">
+            <div>
+              <div class="skill-icon">◫</div>
+              <h3 style="margin-top:18px">반도체 공정</h3>
+              <p>Photo, Deposition, Etching 실습과 MOSCAP 제작을 통해 전공 개념을 공정과 연결했습니다.</p>
+            </div>
+            <div class="tags"><span class="tag">Photo</span><span class="tag">Deposition</span><span class="tag">Etching</span></div>
+          </article>
+
+          <article class="card skill">
+            <div>
+              <div class="skill-icon">⌘</div>
+              <h3 style="margin-top:18px">문제 해결</h3>
+              <p>프로젝트와 팀 활동에서 문제를 구조화하고 역할을 조정하며 결과를 만들어낸 경험이 있습니다.</p>
+            </div>
+            <div class="tags"><span class="tag">Root Cause</span><span class="tag">Teamwork</span><span class="tag">FMEA</span></div>
+          </article>
+
+          <article class="card skill">
+            <div>
+              <div class="skill-icon">IC</div>
+              <h3 style="margin-top:18px">전자·반도체 기초</h3>
+              <p>전자공학 기반의 디지털 설계, MCU, FPGA, CMOS 회로 경험으로 소자부터 시스템까지 이해합니다.</p>
+            </div>
+            <div class="tags"><span class="tag">Verilog</span><span class="tag">FPGA</span><span class="tag">STM32/ESP32</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">03 / Projects</div>
+          <h2>Project Highlights</h2>
+          <p class="section-desc">
+            “무엇을 했다”보다 “왜 했고, 어떻게 문제를 해결했는가”를 중심으로 보여주는 프로젝트 구성입니다.
+          </p>
+        </div>
+
+        <div class="featured card">
+          <div class="project-visual" aria-label="Wire Bonding process visual">
+            <div class="wire w1"></div>
+            <div class="wire w2"></div>
+            <div class="wire w3"></div>
+            <div class="die"></div>
+          </div>
+
+          <div>
+            <div class="meta">Semiconductor Packaging Training · Team Project</div>
+            <h3 style="font-size:28px">Wire Bonding 공정 최적화</h3>
+            <p>
+              Auto Wire Bonder를 이용해 공정 조건을 변화시키고,
+              Wire Pull Test를 통해 접합 강도와 파단 형태를 분석하는 프로젝트입니다.
+            </p>
+            <ul class="project-list">
+              <li><strong>공정 변수:</strong> Ultrasonic Power, Bond Force, Bonding Time</li>
+              <li><strong>실험 방법:</strong> DOE 기반 조건 설계 및 반복 실험</li>
+              <li><strong>평가:</strong> Wire Pull Strength 및 Failure Mode 분석</li>
+              <li><strong>직무 연결:</strong> 공정 변수 → 결과 특성 → 최적 조건 도출</li>
+            </ul>
+            <div class="tags">
+              <span class="tag">Auto Wire Bonder</span>
+              <span class="tag">Wire Pull Test</span>
+              <span class="tag">DOE</span>
+              <span class="tag">Process Optimization</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="height:18px"></div>
+
+        <div class="grid grid-2">
+          <article class="card">
+            <div class="meta">Semiconductor Process Practice</div>
+            <h3>반도체 공정 실습</h3>
+            <p>
+              대학 및 전문 교육 과정에서 Photo, Deposition, Etching을 직접 수행하고
+              MOSCAP을 제작하며 공정 조건이 소자 특성에 미치는 영향을 학습했습니다.
+            </p>
+            <div class="tags">
+              <span class="tag">MOSCAP</span>
+              <span class="tag">Oxide</span>
+              <span class="tag">I-V / C-V</span>
+              <span class="tag">Process Data</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="meta">Capstone Design · Team Project</div>
+            <h3>표정 인식 기반 향기 디스펜서</h3>
+            <p>
+              STM32/ESP32 기반 제어 시스템을 설계하고 센서·제어·소프트웨어를 연계한 프로젝트를 수행했습니다.
+              팀 내 역할 분담과 문제 조율을 경험했고 교내 경진대회 장려상을 수상했습니다.
+            </p>
+            <div class="tags">
+              <span class="tag">ESP32</span>
+              <span class="tag">STM32</span>
+              <span class="tag">Embedded</span>
+              <span class="tag">Team Project</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="meta">Semiconductor / Data Analysis</div>
+            <h3>공정 데이터 분석 경험</h3>
+            <p>
+              산화막 증착 데이터 등을 대상으로 Excel 및 시각화·통계 도구를 활용하여
+              변수 간 관계를 분석하고 공정 최적화 관점에서 결과를 해석했습니다.
+            </p>
+            <div class="tags">
+              <span class="tag">Excel</span>
+              <span class="tag">Spotfire</span>
+              <span class="tag">Regression</span>
+              <span class="tag">Statistics</span>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="meta">Digital / Hardware Engineering</div>
+            <h3>FPGA · Verilog · CMOS Design</h3>
+            <p>
+              Verilog HDL과 FPGA 실습, CMOS Op-Amp 설계 및 Design Flow를 학습하며
+              반도체 설계·소자·공정에 대한 기초적인 연결 구조를 이해했습니다.
+            </p>
+            <div class="tags">
+              <span class="tag">Verilog HDL</span>
+              <span class="tag">Intel FPGA</span>
+              <span class="tag">CMOS</span>
+              <span class="tag">Op-Amp</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="education">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">04 / Education</div>
+          <h2>교육과 학습</h2>
+          <p class="section-desc">
+            전공 지식을 실제 반도체 공정과 패키징 업무로 연결하기 위해 실습 중심으로 학습했습니다.
+          </p>
+        </div>
+
+        <div class="card timeline">
+          <div class="timeline-item">
+            <div class="period">University</div>
+            <h3>전자공학 학사</h3>
+            <p>전자회로, 디지털회로, 반도체 소자, 신호처리, 임베디드 등 전자공학 기초 역량을 구축했습니다.</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="period">Semiconductor Process Training</div>
+            <h3>반도체 공정 실습</h3>
+            <p>Photo · Deposition · Etching · MOSCAP 제작 및 특성 분석을 통해 공정 흐름을 실습했습니다.</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="period">Packaging Engineering Training</div>
+            <h3>반도체 패키징 엔지니어 양성 교육</h3>
+            <p>Package 구조, Sawing, Die Bond, Wire Bond, Mold/Mark, Ball Attach, Test, 불량 분석, 품질관리 등을 학습했습니다.</p>
+          </div>
+
+          <div class="timeline-item">
+            <div class="period">Advanced Packaging</div>
+            <h3>HBM · 2.5D/3D Packaging 관심</h3>
+            <p>첨단 패키징 트렌드에 관심을 두고 HBM, TSV, 2.5D/3D 구조와 후공정 기술을 지속적으로 학습하고 있습니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="career">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">05 / Career Direction</div>
+          <h2>지원 직무 & 커리어 방향</h2>
+          <p class="section-desc">
+            단기적으로는 제조·공정기술 현장에서 데이터를 기반으로 공정을 이해하고 개선하는 경험을 쌓고,
+            장기적으로는 첨단 패키징 분야의 전문 엔지니어로 성장하는 것을 목표로 합니다.
+          </p>
+        </div>
+
+        <div class="grid grid-3">
+          <article class="card">
+            <div class="meta">1st Priority</div>
+            <h3>Process Engineer</h3>
+            <p>생산 공정의 안정화, 공정 조건 최적화, 수율 개선, 불량 분석, 고객 요구 대응 등 공정기술 업무를 수행하고 싶습니다.</p>
+          </article>
+
+          <article class="card">
+            <div class="meta">2nd Priority</div>
+            <h3>Packaging Engineer</h3>
+            <p>Wire Bond, Die Bond, Test 등 패키징 공정 경험을 바탕으로 후공정의 품질과 생산성을 개선하는 엔지니어를 지향합니다.</p>
+          </article>
+
+          <article class="card">
+            <div class="meta">Long-term</div>
+            <h3>Advanced Packaging</h3>
+            <p>HBM 및 2.5D/3D 패키징과 관련된 공정 기술 역량을 쌓아 첨단 패키징 분야에 기여하는 것이 장기 목표입니다.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container">
+        <div class="card" style="padding:34px">
+          <div class="section-kicker">06 / Contact</div>
+          <h2>반도체 공정과 패키징의 현장에서 배우겠습니다.</h2>
+          <p class="section-desc">
+            문제를 데이터로 정의하고, 실험으로 검증하며, 더 안정적인 공정을 만드는 엔지니어가 되겠습니다.
+          </p>
+
+          <div class="contact" style="margin-top:24px">
+            <a href="mailto:your-email@example.com">✉ your-email@example.com</a>
+            <a href="#" onclick="return false;">GitHub: your-github</a>
+            <a href="#" onclick="return false;">LinkedIn: your-linkedin</a>
+          </div>
+
+          <div style="margin-top:25px; font-size:13px; color:var(--muted)">
+            ※ 이메일 / GitHub / LinkedIn은 실제 정보로 교체하세요.
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-grid">
+      <div>
+        <div class="brand">SEONGMIN<span>.TECH</span></div>
+        <div class="small" style="margin-top:7px">Semiconductor Process · Packaging · Data</div>
+      </div>
+      <div class="small">© 2026 Seongmin. All rights reserved.</div>
+    </div>
+  </footer>
+</body>
+</html>
